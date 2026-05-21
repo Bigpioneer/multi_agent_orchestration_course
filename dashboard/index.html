@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-Agent Orchestration Dashboard</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <header class="dashboard-header">
+      <div>
+        <p class="eyebrow">Operations View</p>
+        <h1>Multi-Agent Orchestration Dashboard</h1>
+      </div>
+      <div class="header-meta">
+        <span id="active-count">Active Agents: 0</span>
+        <span id="last-updated">Last Updated: —</span>
+      </div>
+    </header>
+
+    <div id="summary-bar" class="summary-bar" aria-label="summary metrics"></div>
+
+    <main class="dashboard-body">
+      <section class="section-agents" aria-label="agent status cards">
+        <h2>Agent Status</h2>
+        <div id="agent-grid" class="agent-grid"></div>
+      </section>
+
+      <section class="section-tasks" aria-label="task queue">
+        <h2>Task Queue</h2>
+        <div class="task-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="in_progress">In Progress</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="done">Done</button>
+          <button class="filter-btn" data-filter="error">Error</button>
+        </div>
+        <ul id="task-list" class="task-list"></ul>
+      </section>
+
+      <section class="section-logs" aria-label="logs and notes">
+        <h2>Logs / Notes</h2>
+        <div class="log-controls">
+          <input type="text" id="log-search" placeholder="Search logs..." />
+          <select id="log-level-filter">
+            <option value="all">All Levels</option>
+            <option value="info">INFO</option>
+            <option value="warn">WARN</option>
+            <option value="error">ERROR</option>
+            <option value="success">SUCCESS</option>
+          </select>
+        </div>
+        <div id="log-panel" class="log-panel"></div>
+        <div class="memo-area">
+          <h3>Operator Memo</h3>
+          <textarea id="memo-input" placeholder="Write an orchestration memo..."></textarea>
+          <button id="memo-save">Save Memo</button>
+        </div>
+      </section>
+
+      <section class="section-strategy" aria-label="orchestration strategies">
+        <h2>Strategy Checklist</h2>
+        <ul id="strategy-list" class="strategy-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <div id="agent-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay" data-close="modal"></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="agent detail">
+      <button id="modal-close" class="modal-close" type="button">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="./mock-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
